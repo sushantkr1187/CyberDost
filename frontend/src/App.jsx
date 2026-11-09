@@ -4,6 +4,8 @@ import {
   ThumbsUp, ThumbsDown, Search, KeyRound, FileCode2, AlertTriangle,
   CheckCircle2, XCircle, RefreshCw, Copy, Check, ExternalLink, Server, Eye
 } from 'lucide-react';
+import ThreatIntelligencePanel from './components/ThreatIntelligencePanel';
+
 
 const PRESET_SCENARIOS = [
   {
@@ -68,6 +70,18 @@ const PRESET_SCENARIOS = [
         'High visual similarity (94.2%) to SBI NetBanking Portal'
       ],
       sandbox_risk_score: 95
+    },
+    threat_intelligence: {
+      feed: { is_blacklisted: true, feed_name: 'URLhaus (abuse.ch)', threat_type: 'phishing', threat_status: 'online' },
+      infrastructure: { resolved_ip: '104.21.92.11', asn: 13335, asn_description: 'CLOUDFLARENET', country: 'US' },
+      visual: { visual_phishing_detected: true, matched_brands: [{ brand: 'State Bank of India (SBI)', visual_similarity_score: 94.2 }] },
+      advanced_heuristics: { deception_flags: ["Homoglyph substitution", "Lure tokens in domain"] },
+      dom_exfiltration: { indicators: ["Telegram Bot API Exfiltration", "Sensitive Indian KYC / OTP / PIN harvesting input fields"] },
+      takedown_notice: {
+        recipient_suggestion: 'incident@cert-in.org.in, abuse@cloudflare.com',
+        subject: '[URGENT] Phishing Takedown Request - https://on1inesbi-kyc-pan-update.xyz/login',
+        report_body: 'URGENT ABUSE & PHISHING TAKEDOWN REQUEST\n\nMalicious URL: https://on1inesbi-kyc-pan-update.xyz/login\nResolved IP: 104.21.92.11\nTargeted Brand: State Bank of India'
+      }
     }
   },
   {
@@ -709,6 +723,9 @@ export default function App() {
                 )}
               </div>
             </div>
+
+            {/* Embedded Threat Intelligence & Automated Takedown Panel */}
+            <ThreatIntelligencePanel scanResult={scanResult} />
           </>
         )}
 
@@ -748,8 +765,9 @@ export default function App() {
                 >
                   <div>
                     <div className="font-mono text-sm text-white font-semibold">{item.indicator}</div>
-                    <div className="text-xs text-slate-400 mt-1">
-                      {item.threat_type} • <span className="text-amber-300">{item.issuer_ca}</span>
+                    <div className="text-xs text-slate-400 mt-1 flex items-center gap-2">
+                      <span>{item.threat_type}</span>
+                      <span className="text-amber-300">{item.issuer_ca}</span>
                     </div>
                   </div>
                   <div className="flex items-center gap-3">
