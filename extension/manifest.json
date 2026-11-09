@@ -1,6 +1,6 @@
 {
   "manifest_version": 3,
-  "name": "KavachTI Real-Time Phishing & PKI Guard",
+  "name": "CyberDost Real-Time Phishing & PKI Guard",
   "version": "1.0.0",
   "description": "Blocks phishing portals, UPI payment scams, and compromised TLS certificate chains in real time.",
   "permissions": [

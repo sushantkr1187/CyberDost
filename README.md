@@ -1,11 +1,11 @@
-# KavachTI — Unified Phishing, PKI Trust & Web Security Intelligence Platform
+# CyberDost — Unified Phishing, PKI Trust & Web Security Intelligence Platform
 
-KavachTI correlates cryptographic trust chains, network transport posture, visual/DOM headless sandboxing, and collaborative STIX 2.1 threat intelligence into a unified zero-trust defensive platform.
+CyberDost correlates cryptographic trust chains, network transport posture, visual/DOM headless sandboxing, and collaborative STIX 2.1 threat intelligence into a unified zero-trust defensive platform.
 
 ## Project Structure
 
 ```text
-kavachti-platform/
+CyberDost-platform/
 ├── docker-compose.yml                   # Multi-container orchestration (Backend API + PostgreSQL)
 ├── README.md                            # Architecture documentation & setup guide
 ├── backend/                             # Python FastAPI Detection & Intelligence Engines
@@ -17,7 +17,7 @@ kavachti-platform/
 │   ├── module_3_sandbox_visual.py       # Layer C: Headless Chromium, DOM hooks & 64-bit pHash similarity
 │   ├── module_4_threat_intel_stix.py    # Layer D: Multi-layer risk fusion, voting & STIX 2.1 generator
 │   ├── module_5_api_server.py           # FastAPI gateway & concurrent scan orchestrator
-│   └── test_kavachti.py                 # Automated test suite & CVE-2026-111943 exploit simulator
+│   └── test_CyberDost.py                 # Automated test suite & CVE-2026-111943 exploit simulator
 ├── frontend/                            # React + Tailwind SOC Analyst Dashboard
 │   ├── package.json
 │   ├── vite.config.js
@@ -37,7 +37,7 @@ kavachti-platform/
 ```bash
 cd backend
 pip install -r requirements.txt
-python test_kavachti.py
+python test_CyberDost.py
 ```
 
 ### 2. Run Backend API Server
