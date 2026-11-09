@@ -1,3 +1,66 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap');
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+:root { font-family: 'DM Sans', sans-serif; font-synthesis: none; text-rendering: optimizeLegibility; }
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body { margin: 0; font-family: 'DM Sans', sans-serif; background: #080b12; }
+button, input { font: inherit; }
+button { -webkit-tap-highlight-color: transparent; }
+.material-symbols-rounded { font-family: 'Material Symbols Rounded'; font-weight: normal; font-style: normal; font-size: 20px; line-height: 1; letter-spacing: normal; text-transform: none; display: inline-block; white-space: nowrap; direction: ltr; font-feature-settings: 'liga'; -webkit-font-feature-settings: 'liga'; -webkit-font-smoothing: antialiased; }
+.app-shell { --accent: #c5a46d; --accent-soft: rgba(197,164,109,.13); background: radial-gradient(ellipse at 50% -18%, rgba(154,119,66,.13), transparent 43%), #080b12; color: #e8e9ed; min-height: 100vh; transition: background .25s ease, color .25s ease; }
+.app-shell h1, .app-shell h2, .app-shell h3 { font-family: 'Manrope', sans-serif; letter-spacing: -.035em; }
+.app-shell nav { background: rgba(11,14,22,.82) !important; border-color: rgba(197,164,109,.16) !important; box-shadow: 0 1px 0 rgba(255,255,255,.025), 0 14px 40px rgba(0,0,0,.16); }
+.app-shell nav h1 { letter-spacing: -.055em; }
+.app-shell main { padding-top: 2.25rem; padding-bottom: 4rem; }
+.app-shell main > * { animation: rise-in .45s cubic-bezier(.2,.75,.25,1) both; }
+@keyframes rise-in { from { opacity: 0; transform: translateY(9px); } to { opacity: 1; transform: translateY(0); } }
+.app-shell button { transition: transform .18s ease, background .18s ease, border-color .18s ease, box-shadow .18s ease, color .18s ease; }
+.app-shell button:focus-visible, .app-shell input:focus-visible { outline: 2px solid var(--accent) !important; outline-offset: 3px; }
+.app-shell input { transition: border-color .2s ease, box-shadow .2s ease; }
+.app-shell input:focus { box-shadow: 0 0 0 4px rgba(197,164,109,.12); }
+.app-shell .rounded-2xl { border-radius: 1.2rem; }
+.app-shell .rounded-xl { border-radius: .9rem; }
+.app-shell .shadow-xl { box-shadow: 0 18px 55px rgba(0,0,0,.19); }
+.theme-toggle { display: inline-flex; align-items: center; gap: 8px; padding: 9px 12px; border: 1px solid rgba(197,164,109,.28); border-radius: 999px; color: #d6c19b; background: rgba(197,164,109,.08); font-size: 12px; font-weight: 700; }
+.theme-toggle:hover { background: rgba(197,164,109,.16); transform: translateY(-1px); }
+
+/* Light theme: retain the same warm champagne identity with crisp contrast. */
+:root[data-theme='light'] body { background: #f4f2ed; }
+:root[data-theme='light'] .app-shell { background: radial-gradient(ellipse at 50% -18%, rgba(197,164,109,.17), transparent 43%), #f4f2ed; color: #20242b; }
+:root[data-theme='light'] .app-shell nav { background: rgba(250,249,246,.88) !important; border-color: #e6dfd1 !important; box-shadow: 0 8px 30px rgba(54,45,30,.06); }
+:root[data-theme='light'] .app-shell .bg-slate-950 { background-color: #eeece6 !important; }
+:root[data-theme='light'] .app-shell .bg-slate-900 { background-color: #faf9f6 !important; }
+:root[data-theme='light'] .app-shell .bg-slate-900\/60 { background-color: rgba(250,249,246,.88) !important; }
+:root[data-theme='light'] .app-shell .bg-slate-900\/90 { background-color: rgba(250,249,246,.96) !important; }
+:root[data-theme='light'] .app-shell .border-slate-800, :root[data-theme='light'] .app-shell .border-slate-800\/80 { border-color: #e2ddd2 !important; }
+:root[data-theme='light'] .app-shell .border-slate-700 { border-color: #d8d0c1 !important; }
+:root[data-theme='light'] .app-shell .text-white { color: #20242b !important; }
+:root[data-theme='light'] .app-shell .text-slate-100 { color: #252a32 !important; }
+:root[data-theme='light'] .app-shell .text-slate-200 { color: #343a43 !important; }
+:root[data-theme='light'] .app-shell .text-slate-300 { color: #4b515a !important; }
+:root[data-theme='light'] .app-shell .text-slate-400 { color: #70747b !important; }
+:root[data-theme='light'] .app-shell .text-slate-500 { color: #858991 !important; }
+:root[data-theme='light'] .app-shell .text-slate-950 { color: #fff !important; }
+:root[data-theme='light'] .app-shell .bg-gradient-to-br { background-image: linear-gradient(135deg, #fff 0%, #f4f0e8 100%) !important; }
+:root[data-theme='light'] .app-shell .bg-slate-950\/30 { background-color: rgba(238,236,230,.7) !important; }
+:root[data-theme='light'] .app-shell .bg-slate-950\/40 { background-color: rgba(238,236,230,.8) !important; }
+:root[data-theme='light'] .app-shell .theme-toggle { color: #795d2d; background: #f4eddf; border-color: #d9c7a5; }
+:root[data-theme='light'] .app-shell pre { background: #eeece6 !important; color: #365c4a !important; border-color: #e2ddd2 !important; }
+:root[data-theme='light'] .app-shell .hover\:bg-slate-900:hover, :root[data-theme='light'] .app-shell .hover\:bg-slate-800:hover { background-color: #e8e3d9 !important; }
+@media (max-width: 640px) { .app-shell main { padding: 1rem 1rem 3rem; } .app-shell nav > div { padding-left: 1rem; padding-right: 1rem; } .theme-toggle span:last-child { display: none; } }
+@media (prefers-reduced-motion: reduce) { *, *::before, *::after { scroll-behavior: auto !important; animation-duration: .01ms !important; transition-duration: .01ms !important; } }
+/* Champagne-metal primary controls keep the product identity consistent. */
+.app-shell .bg-emerald-500 { background-color: #b99a68 !important; }
+.app-shell .hover\:bg-emerald-400:hover { background-color: #d0b17d !important; }
+.app-shell .text-emerald-300, .app-shell .text-emerald-400 { color: #cbb184; }
+.app-shell .border-emerald-500 { border-color: rgba(197,164,109,.72) !important; }
+.app-shell .shadow-emerald-500\/20 { --tw-shadow-color: rgba(197,164,109,.18) !important; }
+:root[data-theme='light'] .app-shell .bg-emerald-500 { background-color: #987642 !important; }
+:root[data-theme='light'] .app-shell .hover\:bg-emerald-400:hover { background-color: #806334 !important; }
+:root[data-theme='light'] .app-shell .text-emerald-300, :root[data-theme='light'] .app-shell .text-emerald-400 { color: #557c63 !important; }
+:root[data-theme='light'] .app-shell .bg-emerald-500\/10 { background-color: #f1eadc !important; }
+:root[data-theme='light'] .app-shell .bg-emerald-500\/15 { background-color: #eee5d3 !important; }
+:root[data-theme='light'] .app-shell .border-emerald-500, :root[data-theme='light'] .app-shell .border-emerald-500\/30 { border-color: #d7c49f !important; }

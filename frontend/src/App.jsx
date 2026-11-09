@@ -198,6 +198,7 @@ const PRESET_SCENARIOS = [
 ];
 
 export default function App() {
+  const [theme, setTheme] = useState(() => localStorage.getItem('cyberdost-theme') || 'dark');
   const [activeTab, setActiveTab] = useState('scanner');
   const [subTab, setSubTab] = useState('overview');
   const [urlInput, setUrlInput] = useState(PRESET_SCENARIOS[0].url);
@@ -227,7 +228,14 @@ export default function App() {
   ]);
 
   useEffect(() => {
-    fetch('https://cyberdost-2.onrender.com/api/v1/intel/feed')
+    document.documentElement.dataset.theme = theme;
+    localStorage.setItem('cyberdost-theme', theme);
+  }, [theme]);
+
+  useEffect(() => {
+    const controller = new AbortController();
+    const timeout = setTimeout(() => controller.abort(), 7000);
+    fetch('https://cyberdost-2.onrender.com/api/v1/intel/feed', { signal: controller.signal })
       .then((r) => r.ok && r.json())
       .then((data) => {
         if (data?.iocs) {
@@ -235,7 +243,9 @@ export default function App() {
           setLiveBackendOnline(true);
         }
       })
-      .catch(() => setLiveBackendOnline(false));
+      .catch(() => setLiveBackendOnline(false))
+      .finally(() => clearTimeout(timeout));
+    return () => { controller.abort(); clearTimeout(timeout); };
   }, []);
 
   const handleLiveScan = async (e) => {
@@ -313,7 +323,7 @@ export default function App() {
   };
 
   return (
-    <div className="min-h-screen bg-slate-950 text-slate-100 font-sans">
+    <div data-theme={theme} className="app-shell min-h-screen bg-slate-950 text-slate-100 font-sans">
       {/* Top Navbar */}
       <nav className="border-b border-slate-800/80 bg-slate-900/60 backdrop-blur sticky top-0 z-30">
         <div className="max-w-7xl mx-auto px-6 py-4 flex flex-wrap items-center justify-between gap-4">
@@ -358,7 +368,17 @@ export default function App() {
             })}
           </div>
 
-          <div className="flex items-center gap-2 text-xs">
+          <div className="flex items-center gap-3 text-xs">
+            <button
+              type="button"
+              onClick={() => setTheme((current) => current === 'dark' ? 'light' : 'dark')}
+              className="theme-toggle"
+              aria-label={`Switch to ${theme === 'dark' ? 'light' : 'dark'} theme`}
+              title={`Switch to ${theme === 'dark' ? 'light' : 'dark'} theme`}
+            >
+              <span className="material-symbols-rounded">{theme === 'dark' ? 'light_mode' : 'dark_mode'}</span>
+              <span>{theme === 'dark' ? 'Light' : 'Dark'} mode</span>
+            </button>
             <span
               className={`w-2.5 h-2.5 rounded-full ${
                 liveBackendOnline ? 'bg-emerald-400 animate-pulse' : 'bg-amber-400'
