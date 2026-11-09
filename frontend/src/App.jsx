@@ -292,7 +292,7 @@ export default function App() {
 
   const stixBundle = scanResult?.stix_2_1_bundle || {
     type: 'bundle',
-    id: 'bundle--kavachti-99281-stix21',
+    id: 'bundle--CyberDost-99281-stix21',
     objects: [
       {
         type: 'indicator',
@@ -302,7 +302,7 @@ export default function App() {
         pattern_type: 'stix',
         confidence: score,
         extensions: {
-          'x-kavachti-pki': {
+          'x-CyberDost-pki': {
             issuer: scanResult?.pki_certificate_audit?.issuer_cn,
             serial_hex: scanResult?.pki_certificate_audit?.serial_hex,
             crypto: scanResult?.pki_certificate_audit?.crypto_audit
@@ -323,7 +323,7 @@ export default function App() {
             </div>
             <div>
               <div className="flex items-center gap-2.5">
-                <h1 className="text-xl font-extrabold tracking-tight text-white">KavachTI</h1>
+                <h1 className="text-xl font-extrabold tracking-tight text-white">CyberDost</h1>
                 <span className="text-[11px] font-mono uppercase tracking-wider px-2 py-0.5 rounded bg-emerald-500/15 text-emerald-300 border border-emerald-500/30">
                   Zero-Trust SOC v2.1
                 </span>
