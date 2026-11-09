@@ -7,11 +7,13 @@
   <img src="https://img.shields.io/badge/Tailwind_CSS-3-06B6D4?style=for-the-badge&logo=tailwindcss&logoColor=white" alt="Tailwind CSS" />
   <img src="https://img.shields.io/badge/JavaScript-ES6+-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black" alt="JavaScript" />
   <img src="https://img.shields.io/badge/License-Apache_2.0-blue?style=for-the-badge" alt="Apache License 2.0" />
+.
 </p>
 
 <p align="center"> 
 <b>Detect. Analyse. Verify. Protect.</b> </br>
 <i>An integrated security intelligence platform designed to identify phishing websites, investigate suspicious domains, assess TLS/PKI trust, analyse web security posture, and facilitate collaborative threat intelligence.</i>
+.
 </p>
 
 ---
