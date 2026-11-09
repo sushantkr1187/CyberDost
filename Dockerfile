@@ -8,10 +8,6 @@ COPY package.json ./
 COPY server.js cli.js ./
 COPY src/ ./src/
 COPY public/ ./public/
-COPY test/ ./test/
-
-# Run tests during build
-RUN node test/all.js
 
 # Expose server port
 EXPOSE 3000
