@@ -1,0 +1,28 @@
+{
+  "name": "cyberdost-security",
+  "version": "1.0.0",
+  "description": "CyberDost — Intelligent Platform for Phishing & Malicious Website Detection, Web Security Assessment, Certificate Validation, and Collaborative Threat Intelligence",
+  "main": "server.js",
+  "bin": {
+    "cyberdost": "./cli.js"
+  },
+  "scripts": {
+    "start": "node server.js",
+    "test": "node test/all.js",
+    "cli": "node cli.js",
+    "seed": "node src/database/seed.js"
+  },
+  "keywords": [
+    "cyberdost",
+    "phishing-detection",
+    "threat-intelligence",
+    "certificate-transparency",
+    "emudhra-audit",
+    "web-security",
+    "collaborative-threat-intel",
+    "x509",
+    "tls-security"
+  ],
+  "author": "CyberDost Team",
+  "license": "Apache-2.0"
+}

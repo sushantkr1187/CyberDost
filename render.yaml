@@ -1,0 +1,13 @@
+services:
+  - type: web
+    name: cyberdost
+    runtime: node
+    plan: free
+    region: oregon
+    buildCommand: "npm test"
+    startCommand: "node server.js"
+    envVars:
+      - key: NODE_VERSION
+        value: 22.12.0
+      - key: PORT
+        value: 3000

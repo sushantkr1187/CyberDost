@@ -1,0 +1,1042 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TrustMatrix — Intelligent Web Threat, Certificate & Phishing Defense Platform</title>
+
+  <!-- Google Fonts: Plus Jakarta Sans, Inter & JetBrains Mono -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- Google Material Symbols Outlined -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+
+  <link rel="stylesheet" href="/css/styles.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220%22><text y=%2226%22 font-size=%2224%22>⚡</text></svg>">
+</head>
+<body>
+
+  <!-- Top Navigation Bar -->
+  <header class="navbar">
+    <a href="#" class="brand-wrapper" onclick="switchTab('scanner')">
+      <div class="brand-icon">
+        <span class="material-symbols-outlined" style="font-size:24px">shield</span>
+      </div>
+      <div class="brand-text">
+        <span class="brand-title">TrustMatrix</span>
+        <span class="brand-subtitle">Cyber Threat Intelligence & PKI</span>
+      </div>
+    </a>
+
+    <!-- Main Navigation Tabs -->
+    <nav>
+      <ul class="nav-tabs">
+        <li>
+          <button class="nav-link active" onclick="switchTab('scanner')">
+            <span class="material-symbols-outlined">search</span>
+            <span>Live URL Scanner</span>
+          </button>
+        </li>
+        <li>
+          <button class="nav-link" onclick="switchTab('emudhra')">
+            <span class="material-symbols-outlined">vpn_key</span>
+            <span>eMudhra & PKI Audit</span>
+          </button>
+        </li>
+        <li>
+          <button class="nav-link" onclick="switchTab('intel')">
+            <span class="material-symbols-outlined">public</span>
+            <span>Collaborative IOCs</span>
+          </button>
+        </li>
+        <li>
+          <button class="nav-link" onclick="switchTab('brands')">
+            <span class="material-symbols-outlined">domain</span>
+            <span>Brand Surveillance</span>
+          </button>
+        </li>
+        <li>
+          <button class="nav-link" onclick="switchTab('sandbox')">
+            <span class="material-symbols-outlined">science</span>
+            <span>Attack Sandbox</span>
+          </button>
+        </li>
+        <li>
+          <button class="nav-link" onclick="switchTab('api')">
+            <span class="material-symbols-outlined">terminal</span>
+            <span>API & STIX</span>
+          </button>
+        </li>
+      </ul>
+    </nav>
+
+    <!-- Header Actions & Defense Status -->
+    <div class="header-actions">
+      <div class="defense-badge">
+        <span class="pulse-ring"></span>
+        <span>All Defenses Active</span>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Container -->
+  <main class="container">
+
+    <!-- ============================================================== -->
+    <!-- TAB 1: LIVE URL SCANNER & DEEP INSPECTOR                      -->
+    <!-- ============================================================== -->
+    <section id="tab-scanner" class="tab-pane active">
+
+      <!-- Hero Input Card -->
+      <div class="hero-scanner-card">
+        <div class="hero-header-box">
+          <div class="hero-pill-tag">
+            <span class="material-symbols-outlined" style="font-size:16px">verified_user</span>
+            <span>Multi-Dimensional Security Triage</span>
+          </div>
+          <h1 class="hero-heading">
+            Detect Phishing & Malicious Sites with <span class="hero-gradient-text">Zero Compromise</span>
+          </h1>
+          <p class="hero-desc">
+            Unifying brand impersonation heuristics, X.509 cryptographic validation,
+            Certificate Authority auditing (eMudhra incident scrutiny), web posture scoring, and real-time collaborative threat feeds.
+          </p>
+        </div>
+
+        <!-- Scan Form Bar -->
+        <div class="scan-bar-container">
+          <form id="scan-form" onsubmit="handleScanSubmit(event)">
+            <div class="scan-input-group">
+              <div class="protocol-tag">
+                <span class="material-symbols-outlined" style="font-size:18px; color:var(--cyan-bright)">lock</span>
+                <span><b>LINK</b></span>
+              </div>
+              <input
+                type="text"
+                id="scan-url-input"
+                class="scan-text-input"
+                placeholder="Enter suspicious URL (e.g. chase-secure-login-portal.xyz/verify or onlinesbi-kyc-pan-update.top)"
+                required
+                autocomplete="off"
+              >
+              <button type="submit" id="btn-run-scan" class="btn-scan-trigger">
+                <span id="scan-btn-spinner" class="spinner-pulse" style="display:none"></span>
+                <span class="material-symbols-outlined" id="scan-btn-icon" style="font-size:20px">radar</span>
+                <span id="scan-btn-text">INSPECT TARGET</span>
+              </button>
+            </div>
+          </form>
+
+          <!-- Quick Scenario Test Chips -->
+          <div class="scenarios-row">
+            <span class="scenarios-label">Test Scenarios:</span>
+            <button class="scenario-chip danger" onclick="quickFillAndScan('https://chase-secure-login-portal.xyz/verify')">
+              <span class="material-symbols-outlined" style="font-size:16px">credit_card</span>
+              <span>Chase Bank Phishing (.xyz)</span>
+            </button>
+            <button class="scenario-chip danger" onclick="quickFillAndScan('https://onlinesbi-kyc-pan-update.top/login.html')">
+              <span class="material-symbols-outlined" style="font-size:16px">badge</span>
+              <span>SBI Aadhaar/PAN KYC Scam</span>
+            </button>
+            <button class="scenario-chip warning" onclick="quickFillAndScan('https://workday-remote-career-portal.info/apply')">
+              <span class="material-symbols-outlined" style="font-size:16px">work</span>
+              <span>Workday Recruitment Scam</span>
+            </button>
+            <button class="scenario-chip warning" onclick="quickFillAndScan('https://suspicious-emudhra-issued-portal.com')">
+              <span class="material-symbols-outlined" style="font-size:16px">key</span>
+              <span>eMudhra Weak CA Keygen</span>
+            </button>
+            <button class="scenario-chip safe" onclick="quickFillAndScan('https://www.chase.com')">
+              <span class="material-symbols-outlined" style="font-size:16px">check_circle</span>
+              <span>Authentic Chase Bank (EV & HSTS)</span>
+            </button>
+          </div>
+
+          <!-- Live Scan Telemetry Progression Ticker -->
+          <div id="scan-telemetry-ticker" class="scan-telemetry-ticker">
+            <div class="telemetry-step">
+              <span class="spinner-pulse"></span>
+              <span id="telemetry-step-text">Initiating DNS audit and resolving MX/CAA records...</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Scan Results View -->
+      <div id="scan-result-container">
+
+        <!-- Result Overview Master Card -->
+        <div class="result-master-card" id="result-master-card">
+          <!-- Circular Radial Speedometer Gauge -->
+          <div class="gauge-box">
+            <svg class="gauge-svg" viewBox="0 0 100 100">
+              <circle class="gauge-track" cx="50" cy="50" r="42" />
+              <circle id="gauge-progress" class="gauge-progress-bar" cx="50" cy="50" r="42" stroke="var(--rose)" stroke-dasharray="264" stroke-dashoffset="50" />
+            </svg>
+            <div class="gauge-inner-content">
+              <div id="res-score-number" class="gauge-number" style="color:var(--rose)">92</div>
+              <div class="gauge-caption">RISK INDEX</div>
+            </div>
+          </div>
+
+          <!-- Metadata & Executive Summary -->
+          <div>
+            <div class="result-headline">
+              <span id="res-target-domain">chase-secure-login-portal.xyz</span>
+              <span id="res-severity-tag" class="severity-pill rose">CRITICAL MALICIOUS</span>
+            </div>
+            <p id="res-summary-text" class="result-summary-paragraph">
+              CRITICAL THREAT DETECTED: This website exhibits verified characteristics of an active deceptive cyber threat. Immediate blocking recommended.
+            </p>
+            <div class="result-footer-metrics">
+              <span>SCAN ID: <strong id="res-scan-id">scan-1234</strong></span>
+              <span>TIME: <strong id="res-scanned-at">Just now</strong></span>
+              <span>STATUS: <strong id="res-status-code">200 OK</strong></span>
+              <span>LATENCY: <strong id="res-duration">42ms</strong></span>
+            </div>
+          </div>
+
+          <!-- Action Buttons -->
+          <div>
+            <button class="btn-secondary" onclick="exportCurrentReportJson()">
+              <span class="material-symbols-outlined" style="font-size:18px">download</span>
+              <span>Export JSON</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- 4-Pillar Score Cards Grid -->
+        <div class="pillars-grid">
+          <!-- Pillar 1: Threat Heuristics -->
+          <div class="pillar-stat-card">
+            <div class="pillar-top-row">
+              <span class="pillar-name-tag">
+                <span class="material-symbols-outlined" style="font-size:16px; color:var(--rose)">radar</span>
+                <span>Threat Heuristics</span>
+              </span>
+              <span id="pillar-threat-score" class="pillar-score-display" style="color:var(--rose)">96/100</span>
+            </div>
+            <div id="pillar-threat-label" class="pillar-subtext">High Impersonation Risk</div>
+            <div class="pillar-track">
+              <div id="pillar-threat-bar" class="pillar-bar" style="width: 96%; background: var(--rose)"></div>
+            </div>
+          </div>
+
+          <!-- Pillar 2: Certificate Trust & PKI -->
+          <div class="pillar-stat-card">
+            <div class="pillar-top-row">
+              <span class="pillar-name-tag">
+                <span class="material-symbols-outlined" style="font-size:16px; color:var(--amber)">vpn_key</span>
+                <span>Certificate & PKI</span>
+              </span>
+              <span id="pillar-cert-score" class="pillar-score-display" style="color:var(--amber)">40/100</span>
+            </div>
+            <div id="pillar-cert-label" class="pillar-subtext">Ephemeral Cert (&lt; 48h)</div>
+            <div class="pillar-track">
+              <div id="pillar-cert-bar" class="pillar-bar" style="width: 40%; background: var(--amber)"></div>
+            </div>
+          </div>
+
+          <!-- Pillar 3: Web Application Posture -->
+          <div class="pillar-stat-card">
+            <div class="pillar-top-row">
+              <span class="pillar-name-tag">
+                <span class="material-symbols-outlined" style="font-size:16px; color:var(--cyan-bright)">verified_user</span>
+                <span>Web App Posture</span>
+              </span>
+              <span id="pillar-web-score" class="pillar-score-display" style="color:var(--rose)">Grade F</span>
+            </div>
+            <div id="pillar-web-label" class="pillar-subtext">Missing Critical Headers</div>
+            <div class="pillar-track">
+              <div id="pillar-web-bar" class="pillar-bar" style="width: 10%; background: var(--rose)"></div>
+            </div>
+          </div>
+
+          <!-- Pillar 4: Collaborative Intel -->
+          <div class="pillar-stat-card">
+            <div class="pillar-top-row">
+              <span class="pillar-name-tag">
+                <span class="material-symbols-outlined" style="font-size:16px; color:var(--rose)">public</span>
+                <span>Threat Intel Match</span>
+              </span>
+              <span id="pillar-intel-score" class="pillar-score-display" style="color:var(--rose)">MATCH</span>
+            </div>
+            <div id="pillar-intel-label" class="pillar-subtext">Known Malicious IOC</div>
+            <div class="pillar-track">
+              <div id="pillar-intel-bar" class="pillar-bar" style="width: 100%; background: var(--rose)"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Detail Sub-Tabs Navigation -->
+        <div class="subtabs-navigation">
+          <button class="subtab-trigger active" onclick="switchDetailTab('threats')">
+            <span class="material-symbols-outlined">warning</span>
+            <span>Threat Signals (<span id="count-threat-flags">0</span>)</span>
+          </button>
+          <button class="subtab-trigger" onclick="switchDetailTab('cert')">
+            <span class="material-symbols-outlined">vpn_key</span>
+            <span>Certificate & PKI Audit</span>
+          </button>
+          <button class="subtab-trigger" onclick="switchDetailTab('security')">
+            <span class="material-symbols-outlined">shield</span>
+            <span>Web Headers & Posture</span>
+          </button>
+          <button class="subtab-trigger" onclick="switchDetailTab('dns')">
+            <span class="material-symbols-outlined">dns</span>
+            <span>DNS & Email Spoofing</span>
+          </button>
+          <button class="subtab-trigger" onclick="switchDetailTab('intel-detail')">
+            <span class="material-symbols-outlined">hub</span>
+            <span>Collaborative IOC Intel</span>
+          </button>
+          <button class="subtab-trigger" onclick="switchDetailTab('remediation')">
+            <span class="material-symbols-outlined">lightbulb</span>
+            <span>Remediation Playbook</span>
+          </button>
+        </div>
+
+        <!-- Detail Panel 1: Threat Heuristics -->
+        <div id="detail-panel-threats" class="subtab-panel active">
+          <div class="detail-card">
+            <div class="card-header-bar">
+              <div class="card-heading">
+                <span class="material-symbols-outlined" style="color:var(--rose)">crisis_alert</span>
+                <span>Behavioral, Lexical & Impersonation Flags</span>
+              </div>
+              <span id="res-brand-impersonation-badge" class="severity-pill rose" style="display:none">BRAND IMPERSONATION</span>
+            </div>
+            <div id="threat-flags-list">
+              <!-- Dynamically populated -->
+            </div>
+          </div>
+
+          <div class="detail-card">
+            <div class="card-heading" style="margin-bottom:1.25rem">
+              <span class="material-symbols-outlined" style="color:var(--cyan-bright)">analytics</span>
+              <span>Lexical & Structural Telemetry</span>
+            </div>
+            <div style="display:grid; grid-template-columns: repeat(3, 1fr); gap:1.5rem; font-size:0.9rem">
+              <div><strong style="color:var(--text-muted)">Apex Domain:</strong> <div id="telemetry-apex" class="mono-cell" style="margin-top:0.25rem">-</div></div>
+              <div><strong style="color:var(--text-muted)">Domain Entropy:</strong> <div id="telemetry-entropy" class="mono-cell" style="margin-top:0.25rem">-</div></div>
+              <div><strong style="color:var(--text-muted)">IDN Homoglyphs:</strong> <div id="telemetry-homoglyphs" class="mono-cell" style="margin-top:0.25rem">-</div></div>
+              <div><strong style="color:var(--text-muted)">Subdomains:</strong> <div id="telemetry-subdomains" class="mono-cell" style="margin-top:0.25rem">-</div></div>
+              <div><strong style="color:var(--text-muted)">Target Brand Match:</strong> <div id="telemetry-brand" class="mono-cell" style="margin-top:0.25rem">-</div></div>
+              <div><strong style="color:var(--text-muted)">Credential Inputs:</strong> <div id="telemetry-inputs" class="mono-cell" style="margin-top:0.25rem">-</div></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Detail Panel 2: Certificate & PKI Audit -->
+        <div id="detail-panel-cert" class="subtab-panel">
+          <div class="detail-card">
+            <div class="card-header-bar">
+              <div class="card-heading">
+                <span class="material-symbols-outlined" style="color:var(--amber)">verified</span>
+                <span>X.509 Digital Certificate & Cryptographic Health</span>
+              </div>
+              <span id="res-cert-age-badge" class="severity-pill blue">Age: -</span>
+            </div>
+
+            <div id="cert-flags-list" style="margin-bottom:1.25rem">
+              <!-- Dynamically populated -->
+            </div>
+
+            <div class="table-container">
+              <table class="data-table">
+                <tbody>
+                  <tr><th style="width:230px">Subject Common Name</th><td id="cert-subject" class="mono-cell">-</td></tr>
+                  <tr><th>Certificate Authority (Issuer)</th><td id="cert-issuer" class="mono-cell">-</td></tr>
+                  <tr><th>Validity Window</th><td id="cert-validity" class="mono-cell">-</td></tr>
+                  <tr><th>Certificate Lifespan & Age</th><td id="cert-age-details">-</td></tr>
+                  <tr><th>Public Key & Modulus</th><td id="cert-key-details" class="mono-cell">-</td></tr>
+                  <tr><th>ROCA Vulnerability Test</th><td id="cert-roca-status">-</td></tr>
+                  <tr><th>eMudhra Incident Audit</th><td id="cert-emudhra-status">-</td></tr>
+                  <tr><th>Certificate Transparency (CT)</th><td id="cert-ct-status">-</td></tr>
+                  <tr><th>Signature Algorithm</th><td id="cert-sigalg" class="mono-cell">-</td></tr>
+                  <tr><th>Subject Alternative Names</th><td id="cert-sans" class="mono-cell">-</td></tr>
+                  <tr><th>SHA-256 Fingerprint</th><td id="cert-fingerprint" class="mono-cell" style="word-break:break-all">-</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <!-- Detail Panel 3: Web Security Headers & Grade -->
+        <div id="detail-panel-security" class="subtab-panel">
+          <div class="detail-card">
+            <div class="card-header-bar">
+              <div class="card-heading">
+                <span class="material-symbols-outlined" style="color:var(--emerald)">lock_clock</span>
+                <span>HTTP Security Headers Posture</span>
+              </div>
+              <span id="res-security-grade-badge" class="severity-pill emerald" style="font-size:1.05rem">Grade: A+</span>
+            </div>
+
+            <div class="table-container">
+              <table class="data-table">
+                <thead>
+                  <tr>
+                    <th>Security Header</th>
+                    <th>Status</th>
+                    <th>Configured Directive / Value</th>
+                    <th>Defensive Impact</th>
+                  </tr>
+                </thead>
+                <tbody id="security-headers-tbody">
+                  <!-- Dynamically populated -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <div class="detail-card">
+            <div class="card-heading" style="margin-bottom:1.25rem">
+              <span class="material-symbols-outlined" style="color:var(--cyan-bright)">info</span>
+              <span>Information Disclosure & Tech Fingerprinting</span>
+            </div>
+            <div style="display:grid; grid-template-columns: 1fr 1fr; gap:1.5rem; font-size:0.9rem">
+              <div><strong style="color:var(--text-muted)">Server Banner:</strong> <div id="sec-server-banner" class="mono-cell" style="margin-top:0.25rem">-</div></div>
+              <div><strong style="color:var(--text-muted)">Framework / X-Powered-By:</strong> <div id="sec-powered-by" class="mono-cell" style="margin-top:0.25rem">-</div></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Detail Panel 4: DNS & Email Spoofing -->
+        <div id="detail-panel-dns" class="subtab-panel">
+          <div class="detail-card">
+            <div class="card-header-bar">
+              <div class="card-heading">
+                <span class="material-symbols-outlined" style="color:var(--cyan-bright)">dns</span>
+                <span>DNS Trust & Anti-Spoofing Infrastructure</span>
+              </div>
+              <span id="res-dns-score-badge" class="severity-pill blue">DNS Trust: -</span>
+            </div>
+
+            <div class="table-container">
+              <table class="data-table">
+                <tbody>
+                  <tr><th style="width:260px">A / IPv4 Resolution</th><td id="dns-ipv4" class="mono-cell">-</td></tr>
+                  <tr><th>Mail Exchanger (MX)</th><td id="dns-mx" class="mono-cell">-</td></tr>
+                  <tr><th>Sender Policy Framework (SPF)</th><td id="dns-spf" class="mono-cell">-</td></tr>
+                  <tr><th>DMARC Anti-Spoofing Policy</th><td id="dns-dmarc" class="mono-cell">-</td></tr>
+                  <tr><th>CAA (Certificate Authority Auth)</th><td id="dns-caa" class="mono-cell">-</td></tr>
+                  <tr><th>Email Spoofing Resilience</th><td id="dns-spoof-eval">-</td></tr>
+                  <tr><th>Rogue CA Issuance Protection</th><td id="dns-caa-eval">-</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <!-- Detail Panel 5: Collaborative IOC Intel -->
+        <div id="detail-panel-intel-detail" class="subtab-panel">
+          <div class="detail-card">
+            <div class="card-header-bar">
+              <div class="card-heading">
+                <span class="material-symbols-outlined" style="color:var(--rose)">hub</span>
+                <span>Threat Intelligence Feed Matches & Consensus</span>
+              </div>
+              <span id="intel-verdict-badge" class="severity-pill rose">Status: -</span>
+            </div>
+            <div id="intel-details-content">
+              <!-- Dynamically populated -->
+            </div>
+          </div>
+        </div>
+
+        <!-- Detail Panel 6: Remediation Playbook -->
+        <div id="detail-panel-remediation" class="subtab-panel">
+          <div class="detail-card">
+            <div class="card-header-bar">
+              <div class="card-heading">
+                <span class="material-symbols-outlined" style="color:var(--cyan-bright)">task_alt</span>
+                <span>Prioritized Remediation & Defense Playbook</span>
+              </div>
+            </div>
+            <div id="remediation-list">
+              <!-- Dynamically populated -->
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- ============================================================== -->
+    <!-- TAB 2: eMUDHRA & PKI CRYPTOGRAPHIC AUDIT HUB                  -->
+    <!-- ============================================================== -->
+    <section id="tab-emudhra" class="tab-pane">
+      <div class="detail-card" style="border-top:4px solid var(--amber)">
+        <div class="card-header-bar">
+          <div class="card-heading" style="font-size:1.5rem">
+            <span class="material-symbols-outlined" style="font-size:28px; color:var(--amber)">vpn_key_alert</span>
+            <span>The eMudhra TLS Incident & Web Trust Infrastructure Scrutiny</span>
+          </div>
+        </div>
+        <p style="color:var(--text-secondary); font-size:1.02rem; line-height:1.7; margin-bottom:1.75rem">
+          In 2024–2025, security research and CA/Browser Forum audits exposed critical weaknesses in Certificate Authority key generation,
+          predictable PRNG random seeds, and delayed Certificate Transparency (CT) logging at eMudhra.
+          This demonstrated that <strong>having an active HTTPS padlock does not guarantee safety</strong>. Weak cryptographic parameters
+          can allow fraudulent certificates to be created for website impersonation.
+        </p>
+
+        <div style="display:grid; grid-template-columns: repeat(3, 1fr); gap:1.5rem">
+          <div style="background:var(--bg-deepest); padding:1.5rem; border-radius:12px; border-left:4px solid var(--rose)">
+            <h4 style="color:#fda4af; font-family:var(--font-display); margin-bottom:0.5rem; display:flex; align-items:center; gap:0.4rem">
+              <span class="material-symbols-outlined">password</span>
+              <span>1. Weak PRNG & Keygen Flaws</span>
+            </h4>
+            <p style="font-size:0.875rem; color:var(--text-secondary); line-height:1.6">
+              Subscriber keys generated with flawed random seeds produce RSA primes vulnerable to GCD batch factorization or Coppersmith's attack (ROCA pattern).
+            </p>
+          </div>
+          <div style="background:var(--bg-deepest); padding:1.5rem; border-radius:12px; border-left:4px solid var(--amber)">
+            <h4 style="color:#fcd34d; font-family:var(--font-display); margin-bottom:0.5rem; display:flex; align-items:center; gap:0.4rem">
+              <span class="material-symbols-outlined">history_toggle_off</span>
+              <span>2. Delayed CT Logging</span>
+            </h4>
+            <p style="font-size:0.875rem; color:var(--text-secondary); line-height:1.6">
+              Failure to promptly append Signed Certificate Timestamps (SCTs) to public CT logs prevents domain owners from monitoring unauthorized certificate issuance in real-time.
+            </p>
+          </div>
+          <div style="background:var(--bg-deepest); padding:1.5rem; border-radius:12px; border-left:4px solid var(--cyan-bright)">
+            <h4 style="color:#7dd3fc; font-family:var(--font-display); margin-bottom:0.5rem; display:flex; align-items:center; gap:0.4rem">
+              <span class="material-symbols-outlined">rule</span>
+              <span>3. CAA Record Absence</span>
+            </h4>
+            <p style="font-size:0.875rem; color:var(--text-secondary); line-height:1.6">
+              Without strict DNS Certification Authority Authorization (CAA) records, any compromised or flawed CA worldwide can issue certificates for high-value banking and government domains.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Active CA Advisories Table -->
+      <div class="detail-card">
+        <div class="card-header-bar">
+          <div class="card-heading">
+            <span class="material-symbols-outlined" style="color:var(--cyan-bright)">policy</span>
+            <span>Certificate Authority Compliance Advisories & Incident Registry</span>
+          </div>
+        </div>
+        <div class="table-container">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>Advisory / Issuer</th>
+                <th>Severity</th>
+                <th>Incident Details</th>
+                <th>Remediation & Recommendation</th>
+                <th>Tracking ID</th>
+              </tr>
+            </thead>
+            <tbody id="advisories-tbody">
+              <!-- Dynamically populated -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ============================================================== -->
+    <!-- TAB 3: COLLABORATIVE THREAT INTELLIGENCE & IOC FEED           -->
+    <!-- ============================================================== -->
+    <section id="tab-intel" class="tab-pane">
+      <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:2rem; flex-wrap:wrap; gap:1rem">
+        <div>
+          <h2 style="font-family:var(--font-display); font-size:1.85rem; font-weight:800; color:#fff; display:flex; align-items:center; gap:0.6rem">
+            <span class="material-symbols-outlined" style="font-size:32px; color:var(--cyan-bright)">public</span>
+            <span>Collaborative Threat Intelligence Hub</span>
+          </h2>
+          <p style="color:var(--text-secondary); font-size:0.95rem">
+            Decentralized community reporting, analyst peer verification, and automated IOC feed distribution.
+          </p>
+        </div>
+        <div style="display:flex; gap:0.75rem">
+          <button class="btn-secondary" onclick="exportSTIX()">
+            <span class="material-symbols-outlined" style="font-size:18px">download</span>
+            <span>Download STIX 2.1 Bundle</span>
+          </button>
+          <button class="btn-primary" onclick="openReportModal()">
+            <span class="material-symbols-outlined" style="font-size:18px">add_circle</span>
+            <span>Submit Threat Incident</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Live Stats Bar -->
+      <div class="pillars-grid" style="margin-bottom:2rem">
+        <div class="pillar-stat-card">
+          <div class="pillar-top-row">
+            <span class="pillar-name-tag">
+              <span class="material-symbols-outlined" style="font-size:16px">database</span>
+              <span>Active IOCs</span>
+            </span>
+          </div>
+          <div id="stat-total-iocs" class="pillar-score-display" style="color:var(--cyan-bright)">-</div>
+          <div class="pillar-subtext">Domains, URLs, IPs & Hashes</div>
+        </div>
+        <div class="pillar-stat-card">
+          <div class="pillar-top-row">
+            <span class="pillar-name-tag">
+              <span class="material-symbols-outlined" style="font-size:16px">campaign</span>
+              <span>Community Reports</span>
+            </span>
+          </div>
+          <div id="stat-total-reports" class="pillar-score-display" style="color:var(--amber-bright)">-</div>
+          <div class="pillar-subtext">Crowdsourced submissions</div>
+        </div>
+        <div class="pillar-stat-card">
+          <div class="pillar-top-row">
+            <span class="pillar-name-tag">
+              <span class="material-symbols-outlined" style="font-size:16px">how_to_vote</span>
+              <span>Verified by Consensus</span>
+            </span>
+          </div>
+          <div id="stat-verified-reports" class="pillar-score-display" style="color:var(--emerald-bright)">-</div>
+          <div class="pillar-subtext">Analyst confirmed threats</div>
+        </div>
+        <div class="pillar-stat-card">
+          <div class="pillar-top-row">
+            <span class="pillar-name-tag">
+              <span class="material-symbols-outlined" style="font-size:16px">domain</span>
+              <span>Monitored Brands</span>
+            </span>
+          </div>
+          <div id="stat-monitored-brands" class="pillar-score-display" style="color:var(--violet-bright)">-</div>
+          <div class="pillar-subtext">Active brand surveillance</div>
+        </div>
+      </div>
+
+      <!-- Community Triage & Voting Queue -->
+      <div class="detail-card" style="margin-bottom:2rem">
+        <div class="card-header-bar">
+          <div class="card-heading">
+            <span class="material-symbols-outlined" style="color:var(--amber-bright)">rate_review</span>
+            <span>Community Triage & Analyst Verification Queue</span>
+          </div>
+          <span style="font-size:0.8rem; color:var(--text-muted)">Analysts cast consensus votes to promote threats</span>
+        </div>
+        <div class="table-container">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>Reported Target / URL</th>
+                <th>Category</th>
+                <th>Target Brand</th>
+                <th>Reporter</th>
+                <th>Analyst Votes</th>
+                <th>Status</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody id="community-reports-tbody">
+              <!-- Dynamically populated -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Live Indicators of Compromise (IOC) Table -->
+      <div class="detail-card">
+        <div class="card-header-bar">
+          <div class="card-heading">
+            <span class="material-symbols-outlined" style="color:var(--cyan-bright)">list_alt</span>
+            <span>Active Indicators of Compromise (IOCs)</span>
+          </div>
+          <div style="display:flex; align-items:center; gap:0.5rem">
+            <input
+              type="text"
+              id="ioc-search-input"
+              class="form-control"
+              placeholder="Filter by domain, brand, or hash..."
+              style="width: 280px; font-size: 0.85rem; padding: 0.5rem 0.85rem"
+              oninput="filterIocs(this.value)"
+            >
+          </div>
+        </div>
+        <div class="table-container">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>Type</th>
+                <th>Indicator Value</th>
+                <th>Threat Category</th>
+                <th>Target Brand</th>
+                <th>Severity</th>
+                <th>Source</th>
+                <th>Confidence</th>
+                <th>Last Seen</th>
+              </tr>
+            </thead>
+            <tbody id="iocs-tbody">
+              <!-- Dynamically populated -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ============================================================== -->
+    <!-- TAB 4: BRAND SURVEILLANCE & HOMOGLYPHS                       -->
+    <!-- ============================================================== -->
+    <section id="tab-brands" class="tab-pane">
+      <div class="detail-card" style="margin-bottom:2rem">
+        <div class="card-heading" style="font-size:1.5rem; margin-bottom:0.75rem">
+          <span class="material-symbols-outlined" style="font-size:28px; color:var(--cyan-bright)">domain_verification</span>
+          <span>Brand Impersonation & Typosquatting Surveillance</span>
+        </div>
+        <p style="color:var(--text-secondary); line-height:1.7; margin-bottom:1.75rem">
+          Continuous active surveillance of high-value brands across banking, digital payments, government services, and tech giants.
+          Detects lookalike domains, Cyrillic/Greek IDN homoglyphs, and deceptive subdomain nesting before attacks proliferate.
+        </p>
+
+        <!-- Interactive Homoglyph & Punycode Sandbox -->
+        <div style="background:var(--bg-deepest); padding:1.75rem; border-radius:14px; border:1px solid var(--border-glass)">
+          <div style="display:flex; align-items:center; gap:0.5rem; margin-bottom:0.75rem">
+            <span class="material-symbols-outlined" style="color:var(--cyan-bright)">spellcheck</span>
+            <strong style="color:#fff; font-family:var(--font-display)">Interactive IDN Homoglyph & Punycode Analyzer</strong>
+          </div>
+          <div style="display:flex; gap:0.75rem; margin-bottom:1rem">
+            <input
+              type="text"
+              id="homoglyph-test-input"
+              class="form-control mono-cell"
+              placeholder="Type or paste domain (e.g. chase-secure-portal or onlinesbi-kyc or paypa1)"
+              value="chase-secure-portal.com"
+            >
+            <button class="btn-primary" onclick="testHomoglyphSim()">
+              <span class="material-symbols-outlined" style="font-size:18px">translate</span>
+              <span>Inspect Characters</span>
+            </button>
+          </div>
+          <div id="homoglyph-sim-output" class="mono-cell" style="color:var(--text-secondary); font-size:0.9rem; line-height:1.7">
+            Type a domain name above to calculate Shannon character entropy, identify lookalikes, and generate punycode strings.
+          </div>
+        </div>
+      </div>
+
+      <!-- Monitored Brands Grid -->
+      <div class="detail-card">
+        <div class="card-header-bar">
+          <div class="card-heading">
+            <span class="material-symbols-outlined" style="color:var(--emerald-bright)">shield</span>
+            <span>Protected Enterprise & National Portals (Watchlist)</span>
+          </div>
+        </div>
+        <div id="brands-grid" class="pillars-grid">
+          <!-- Dynamically populated -->
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ============================================================== -->
+    <!-- TAB 5: ATTACK SANDBOX & SCENARIOS                            -->
+    <!-- ============================================================== -->
+    <section id="tab-sandbox" class="tab-pane">
+      <div class="detail-card" style="margin-bottom:2rem">
+        <div class="card-heading" style="font-size:1.5rem; margin-bottom:0.5rem">
+          <span class="material-symbols-outlined" style="font-size:28px; color:var(--cyan-bright)">science</span>
+          <span>Interactive Attack Sandbox & Threat Archetypes</span>
+        </div>
+        <p style="color:var(--text-secondary); line-height:1.7">
+          Simulate realistic phishing campaigns, credential harvesters, flawed Certificate Authorities, and authentic banking baselines with one click.
+        </p>
+      </div>
+
+      <div style="display:grid; grid-template-columns: repeat(2, 1fr); gap:1.5rem">
+
+        <!-- Scenario 1 -->
+        <div class="detail-card" style="border-top:4px solid var(--rose)">
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:0.5rem">
+            <span class="severity-pill rose">CRITICAL PHISHING</span>
+            <span class="mono-cell" style="color:var(--text-muted); font-size:0.8rem">Scenario #1</span>
+          </div>
+          <h3 style="font-family:var(--font-display); font-size:1.2rem; margin-bottom:0.4rem">Chase Bank Credential & Card Harvester</h3>
+          <p style="font-size:0.875rem; color:var(--text-secondary); line-height:1.6; margin-bottom:1.25rem">
+            Deceptive domain <code>chase-secure-login-portal.xyz</code> imitating JPMorgan Chase. Features brand keyword stuffing,
+            2-hour old Let's Encrypt DV certificate, card/CVV inputs, and anti-right-click protection.
+          </p>
+          <button class="btn-primary" style="width:100%; justify-content:center" onclick="quickFillAndScan('https://chase-secure-login-portal.xyz/verify')">
+            <span class="material-symbols-outlined" style="font-size:18px">play_arrow</span>
+            <span>Launch Inspection</span>
+          </button>
+        </div>
+
+        <!-- Scenario 2 -->
+        <div class="detail-card" style="border-top:4px solid var(--rose)">
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:0.5rem">
+            <span class="severity-pill rose">GOVERNMENT & BANKING FRAUD</span>
+            <span class="mono-cell" style="color:var(--text-muted); font-size:0.8rem">Scenario #2</span>
+          </div>
+          <h3 style="font-family:var(--font-display); font-size:1.2rem; margin-bottom:0.4rem">State Bank of India Aadhaar/PAN KYC Scam</h3>
+          <p style="font-size:0.875rem; color:var(--text-secondary); line-height:1.6; margin-bottom:1.25rem">
+            Smishing campaign targeting Indian banking customers claiming PAN card deactivation. Form exfiltrates
+            NetBanking credentials and OTP directly to an unauthorized Telegram bot webhook.
+          </p>
+          <button class="btn-primary" style="width:100%; justify-content:center" onclick="quickFillAndScan('https://onlinesbi-kyc-pan-update.top/login.html')">
+            <span class="material-symbols-outlined" style="font-size:18px">play_arrow</span>
+            <span>Launch Inspection</span>
+          </button>
+        </div>
+
+        <!-- Scenario 3 -->
+        <div class="detail-card" style="border-top:4px solid var(--amber)">
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:0.5rem">
+            <span class="severity-pill amber">RECRUITMENT SCAM</span>
+            <span class="mono-cell" style="color:var(--text-muted); font-size:0.8rem">Scenario #3</span>
+          </div>
+          <h3 style="font-family:var(--font-display); font-size:1.2rem; margin-bottom:0.4rem">Fake Workday Remote Job Portal</h3>
+          <p style="font-size:0.875rem; color:var(--text-secondary); line-height:1.6; margin-bottom:1.25rem">
+            Advance-fee recruitment scam mimicking Workday career portals. Requests SSN, banking details, and $45 equipment fee
+            from software engineering applicants.
+          </p>
+          <button class="btn-primary" style="width:100%; justify-content:center" onclick="quickFillAndScan('https://workday-remote-career-portal.info/apply')">
+            <span class="material-symbols-outlined" style="font-size:18px">play_arrow</span>
+            <span>Launch Inspection</span>
+          </button>
+        </div>
+
+        <!-- Scenario 4 -->
+        <div class="detail-card" style="border-top:4px solid var(--amber)">
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:0.5rem">
+            <span class="severity-pill amber">PKI / CA INCIDENT</span>
+            <span class="mono-cell" style="color:var(--text-muted); font-size:0.8rem">Scenario #4</span>
+          </div>
+          <h3 style="font-family:var(--font-display); font-size:1.2rem; margin-bottom:0.4rem">eMudhra Flawed CA Keygen & ROCA Flaw</h3>
+          <p style="font-size:0.875rem; color:var(--text-secondary); line-height:1.6; margin-bottom:1.25rem">
+            TLS certificate issued under eMudhra CA hierarchy featuring vulnerable 1024-bit RSA modulus, ROCA factorization
+            fingerprint, deprecated SHA-1 signature, and missing Certificate Transparency SCTs.
+          </p>
+          <button class="btn-primary" style="width:100%; justify-content:center" onclick="quickFillAndScan('https://suspicious-emudhra-issued-portal.com')">
+            <span class="material-symbols-outlined" style="font-size:18px">play_arrow</span>
+            <span>Launch Inspection</span>
+          </button>
+        </div>
+
+        <!-- Scenario 5 -->
+        <div class="detail-card" style="border-top:4px solid var(--emerald); grid-column: span 2">
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:0.5rem">
+            <span class="severity-pill emerald">AUTHENTIC BASELINE</span>
+            <span class="mono-cell" style="color:var(--text-muted); font-size:0.8rem">Scenario #5</span>
+          </div>
+          <h3 style="font-family:var(--font-display); font-size:1.2rem; margin-bottom:0.4rem">Authentic JPMorgan Chase (Official Bank)</h3>
+          <p style="font-size:0.875rem; color:var(--text-secondary); line-height:1.6; margin-bottom:1.25rem">
+            Official banking baseline with DigiCert EV certificate, strict CSP directives, HSTS preload, DMARC p=reject,
+            and strict CAA authorization records.
+          </p>
+          <button class="btn-primary" style="width:100%; justify-content:center" onclick="quickFillAndScan('https://www.chase.com')">
+            <span class="material-symbols-outlined" style="font-size:18px">play_arrow</span>
+            <span>Launch Inspection</span>
+          </button>
+        </div>
+
+      </div>
+    </section>
+
+
+    <!-- ============================================================== -->
+    <!-- TAB 6: REST API & STIX 2.1 DOCUMENTATION                      -->
+    <!-- ============================================================== -->
+    <section id="tab-api" class="tab-pane">
+      <div class="detail-card" style="margin-bottom:2rem">
+        <div class="card-heading" style="font-size:1.5rem; margin-bottom:0.5rem">
+          <span class="material-symbols-outlined" style="font-size:28px; color:var(--cyan-bright)">terminal</span>
+          <span>TrustMatrix RESTful Threat API & STIX 2.1 Feeds</span>
+        </div>
+        <p style="color:var(--text-secondary); line-height:1.7">
+          Integrate real-time website threat triage, certificate validation, and community threat intelligence directly into your SIEM, SOAR, firewall, or security proxy.
+        </p>
+      </div>
+
+      <div class="detail-card">
+        <div class="card-heading" style="margin-bottom:1.5rem">
+          <span class="material-symbols-outlined" style="color:var(--cyan-bright)">code</span>
+          <span>Production Endpoints & Curl Examples</span>
+        </div>
+
+        <!-- Endpoint 1 -->
+        <div style="margin-bottom:1.75rem">
+          <div style="display:flex; align-items:center; gap:0.6rem; margin-bottom:0.5rem">
+            <span class="severity-pill rose mono-cell">POST</span>
+            <strong class="mono-cell" style="color:#fff">/api/scan</strong>
+            <span style="font-size:0.85rem; color:var(--text-muted)">— Inspect website across all 4 defense pillars</span>
+          </div>
+          <div style="background:var(--bg-deepest); border:1px solid var(--border-glass); padding:0.85rem 1.25rem; border-radius:8px; display:flex; justify-content:space-between; align-items:center">
+            <code class="mono-cell" style="color:var(--cyan-bright); font-size:0.85rem">curl -X POST http://localhost:3000/api/scan -H "Content-Type: application/json" -d '{"url":"https://chase-secure-login-portal.xyz/verify"}'</code>
+            <button class="btn-copy" onclick="copyToClipboard('curl -X POST http://localhost:3000/api/scan -H &quot;Content-Type: application/json&quot; -d \'{\&quot;url\&quot;:\&quot;https://chase-secure-login-portal.xyz/verify\&quot;}\'')">
+              <span class="material-symbols-outlined" style="font-size:16px">content_copy</span>
+              <span>Copy</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Endpoint 2 -->
+        <div style="margin-bottom:1.75rem">
+          <div style="display:flex; align-items:center; gap:0.6rem; margin-bottom:0.5rem">
+            <span class="severity-pill blue mono-cell">GET</span>
+            <strong class="mono-cell" style="color:#fff">/api/iocs/export/stix</strong>
+            <span style="font-size:0.85rem; color:var(--text-muted)">— Download active threat database as STIX 2.1 JSON bundle</span>
+          </div>
+          <div style="background:var(--bg-deepest); border:1px solid var(--border-glass); padding:0.85rem 1.25rem; border-radius:8px; display:flex; justify-content:space-between; align-items:center">
+            <code class="mono-cell" style="color:var(--cyan-bright); font-size:0.85rem">curl http://localhost:3000/api/iocs/export/stix -o trustmatrix-stix-bundle.json</code>
+            <button class="btn-copy" onclick="copyToClipboard('curl http://localhost:3000/api/iocs/export/stix -o trustmatrix-stix-bundle.json')">
+              <span class="material-symbols-outlined" style="font-size:16px">content_copy</span>
+              <span>Copy</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Endpoint 3 -->
+        <div style="margin-bottom:1.75rem">
+          <div style="display:flex; align-items:center; gap:0.6rem; margin-bottom:0.5rem">
+            <span class="severity-pill blue mono-cell">GET</span>
+            <strong class="mono-cell" style="color:#fff">/api/iocs?q=domain</strong>
+            <span style="font-size:0.85rem; color:var(--text-muted)">— Search and query threat indicators</span>
+          </div>
+          <div style="background:var(--bg-deepest); border:1px solid var(--border-glass); padding:0.85rem 1.25rem; border-radius:8px; display:flex; justify-content:space-between; align-items:center">
+            <code class="mono-cell" style="color:var(--cyan-bright); font-size:0.85rem">curl "http://localhost:3000/api/iocs?category=Credential%20Harvesting%20Phishing"</code>
+            <button class="btn-copy" onclick="copyToClipboard('curl &quot;http://localhost:3000/api/iocs?category=Credential%20Harvesting%20Phishing&quot;')">
+              <span class="material-symbols-outlined" style="font-size:16px">content_copy</span>
+              <span>Copy</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Endpoint 4 -->
+        <div style="margin-bottom:1.75rem">
+          <div style="display:flex; align-items:center; gap:0.6rem; margin-bottom:0.5rem">
+            <span class="severity-pill rose mono-cell">POST</span>
+            <strong class="mono-cell" style="color:#fff">/api/reports</strong>
+            <span style="font-size:0.85rem; color:var(--text-muted)">— Submit crowdsourced incident report</span>
+          </div>
+          <div style="background:var(--bg-deepest); border:1px solid var(--border-glass); padding:0.85rem 1.25rem; border-radius:8px; display:flex; justify-content:space-between; align-items:center">
+            <code class="mono-cell" style="color:var(--cyan-bright); font-size:0.85rem">curl -X POST http://localhost:3000/api/reports -H "Content-Type: application/json" -d '{"url":"https://fake-login.xyz","category":"Phishing","reporter_name":"Analyst1"}'</code>
+            <button class="btn-copy" onclick="copyToClipboard('curl -X POST http://localhost:3000/api/reports -H &quot;Content-Type: application/json&quot; -d \'{\&quot;url\&quot;:\&quot;https://fake-login.xyz\&quot;,\&quot;category\&quot;:\&quot;Phishing\&quot;,\&quot;reporter_name\&quot;:\&quot;Analyst1\&quot;}\'')">
+              <span class="material-symbols-outlined" style="font-size:16px">content_copy</span>
+              <span>Copy</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Endpoint 5 -->
+        <div>
+          <div style="display:flex; align-items:center; gap:0.6rem; margin-bottom:0.5rem">
+            <span class="severity-pill rose mono-cell">POST</span>
+            <strong class="mono-cell" style="color:#fff">/api/reports/:id/vote</strong>
+            <span style="font-size:0.85rem; color:var(--text-muted)">— Cast analyst verification vote (UPVOTE/DOWNVOTE)</span>
+          </div>
+          <div style="background:var(--bg-deepest); border:1px solid var(--border-glass); padding:0.85rem 1.25rem; border-radius:8px; display:flex; justify-content:space-between; align-items:center">
+            <code class="mono-cell" style="color:var(--cyan-bright); font-size:0.85rem">curl -X POST http://localhost:3000/api/reports/rep-001/vote -H "Content-Type: application/json" -d '{"voter_id":"analyst_42","vote_type":"UPVOTE","comment":"Verified credential harvester"}'</code>
+            <button class="btn-copy" onclick="copyToClipboard('curl -X POST http://localhost:3000/api/reports/rep-001/vote -H &quot;Content-Type: application/json&quot; -d \'{\&quot;voter_id\&quot;:\&quot;analyst_42\&quot;,\&quot;vote_type\&quot;:\&quot;UPVOTE\&quot;,\&quot;comment\&quot;:\&quot;Verified credential harvester\&quot;}\'')">
+              <span class="material-symbols-outlined" style="font-size:16px">content_copy</span>
+              <span>Copy</span>
+            </button>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Submit Threat Incident Modal -->
+  <div id="report-modal" class="modal-backdrop">
+    <div class="modal-dialog">
+      <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:1.5rem">
+        <h3 style="font-family:var(--font-display); font-size:1.35rem; display:flex; align-items:center; gap:0.5rem">
+          <span class="material-symbols-outlined" style="color:var(--cyan-bright)">add_alert</span>
+          <span>Submit Threat Incident Report</span>
+        </h3>
+        <button type="button" class="btn-copy" onclick="closeReportModal()">
+          <span class="material-symbols-outlined" style="font-size:20px">close</span>
+        </button>
+      </div>
+
+      <form id="incident-form" onsubmit="handleReportSubmit(event)">
+        <div style="margin-bottom:1.25rem">
+          <label style="display:block; font-size:0.85rem; font-weight:600; color:var(--text-secondary); margin-bottom:0.4rem">
+            Suspicious Target URL *
+          </label>
+          <input type="text" id="rep-url" class="form-control mono-cell" placeholder="https://example-phish.xyz/login" required>
+        </div>
+
+        <div style="display:grid; grid-template-columns: 1fr 1fr; gap:1rem; margin-bottom:1.25rem">
+          <div>
+            <label style="display:block; font-size:0.85rem; font-weight:600; color:var(--text-secondary); margin-bottom:0.4rem">
+              Threat Category *
+            </label>
+            <select id="rep-category" class="form-control" required>
+              <option value="Credential Harvesting Phishing">Credential Harvesting Phishing</option>
+              <option value="Fake Payment Gateway">Fake Payment Gateway</option>
+              <option value="Recruitment Scam">Recruitment Scam</option>
+              <option value="Government Impersonation">Government Impersonation</option>
+              <option value="Cryptocurrency Drainer">Cryptocurrency Drainer</option>
+              <option value="Malicious Redirect / Exploit">Malicious Redirect / Exploit</option>
+            </select>
+          </div>
+          <div>
+            <label style="display:block; font-size:0.85rem; font-weight:600; color:var(--text-secondary); margin-bottom:0.4rem">
+              Target Brand / Entity
+            </label>
+            <input type="text" id="rep-brand" class="form-control" placeholder="e.g. JPMorgan Chase, SBI, PayPal">
+          </div>
+        </div>
+
+        <div style="display:grid; grid-template-columns: 1fr 1fr; gap:1rem; margin-bottom:1.25rem">
+          <div>
+            <label style="display:block; font-size:0.85rem; font-weight:600; color:var(--text-secondary); margin-bottom:0.4rem">
+              Your Name / Handle *
+            </label>
+            <input type="text" id="rep-name" class="form-control" placeholder="e.g. Elena Rostova" required>
+          </div>
+          <div>
+            <label style="display:block; font-size:0.85rem; font-weight:600; color:var(--text-secondary); margin-bottom:0.4rem">
+              Your Role / Organization
+            </label>
+            <input type="text" id="rep-role" class="form-control" placeholder="e.g. Senior SOC Analyst @ CERT">
+          </div>
+        </div>
+
+        <div style="margin-bottom:1.25rem">
+          <label style="display:block; font-size:0.85rem; font-weight:600; color:var(--text-secondary); margin-bottom:0.4rem">
+            Technical Evidence / Indicators
+          </label>
+          <textarea id="rep-evidence" class="form-control" rows="3" placeholder="Describe credential form endpoints, exfiltration webhooks, fake domains..."></textarea>
+        </div>
+
+        <div style="margin-bottom:1.75rem">
+          <label style="display:block; font-size:0.85rem; font-weight:600; color:var(--text-secondary); margin-bottom:0.4rem">
+            Analyst Notes / Context
+          </label>
+          <textarea id="rep-notes" class="form-control" rows="2" placeholder="e.g. Circulated via WhatsApp SMS claiming PAN card deactivation within 12h..."></textarea>
+        </div>
+
+        <div style="display:flex; justify-content:flex-end; gap:0.85rem">
+          <button type="button" class="btn-secondary" onclick="closeReportModal()">Cancel</button>
+          <button type="submit" class="btn-primary">
+            <span class="material-symbols-outlined" style="font-size:18px">send</span>
+            <span>Submit for Peer Review</span>
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Toast Notification Element -->
+  <div id="toast-notice" class="toast-notice">
+    <span class="material-symbols-outlined" id="toast-icon" style="color:var(--cyan-bright)">info</span>
+    <span id="toast-message">Notification</span>
+  </div>
+
+  <script src="/js/app.js"></script>
+</body>
+</html>
