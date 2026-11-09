@@ -227,7 +227,7 @@ export default function App() {
   ]);
 
   useEffect(() => {
-    fetch('http://localhost:8000/api/v1/intel/feed')
+    fetch('https://cyberdost-2.onrender.com/api/v1/intel/feed')
       .then((r) => r.ok && r.json())
       .then((data) => {
         if (data?.iocs) {
@@ -242,7 +242,7 @@ export default function App() {
     e?.preventDefault();
     setIsScanning(true);
     try {
-      const response = await fetch('http://localhost:8000/api/v1/scan', {
+      const response = await fetch('https://cyberdost-2.onrender.com/api/v1/scan', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ url: urlInput, run_headless_sandbox: false })
@@ -281,7 +281,7 @@ export default function App() {
       )
     );
     try {
-      await fetch(`http://localhost:8000/api/v1/intel/vote/${id}/${dir}`, { method: 'POST' });
+      await fetch(`https://cyberdost-2.onrender.com/api/v1/intel/vote/${id}/${dir}`, { method: 'POST' });
     } catch {}
   };
 
