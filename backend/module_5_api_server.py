@@ -76,6 +76,14 @@ async def full_url_scan(req: URLScanRequest):
         "stix_2_1_bundle": stix_bundle
     }
 
+@app.get("/")
+async def root_health_check():
+    return {
+        "status": "online",
+        "service": "KavachTI Security & PKI Intelligence API",
+        "docs": "/docs"
+    }
+
 
 @app.post("/api/v1/pki/inspect-pem")
 async def inspect_pem_certificate(req: PEMInspectRequest):
