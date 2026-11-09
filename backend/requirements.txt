@@ -1,0 +1,8 @@
+fastapi
+uvicorn
+cryptography
+httpx
+playwright
+Pillow
+imagehash
+pydantic
